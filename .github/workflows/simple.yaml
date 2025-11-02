@@ -10,51 +10,55 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-      runs-on: windows-latest
-      steps:
-      - name: Setup node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 18
-      - name: Run a node command
-        run: node -e "console.log('running from node!')"
+    matrix_tests:
+        strategy:
+          matrix:
+            version: ["0.1.0","0.1.1","0.2.0"]
+            os: [ubuntu-latest,windows-latest]
+        runs-on: ${{matrix.os}}
+        steps:
+        - name: Setup node
+          uses: actions/setup-node@v6
+          with:
+            node-version: 18
+        - name: Run a node command
+          run: node -e "console.log('running from node!')"
         
-  test1:
-      runs-on: windows-latest
-      steps:
-      - name: Run a node command
-        run: #Exit if therun number is greater than maximum number of attempts
-          if [ $RUN_ATTEMPT_NUMBER -gt $MAXIMUM_ATTEMPTS ]; then
-            echo "EXisting beacuse the run number tahn the maximum number of attempts"
-            exit 1
-          fi
-        env:
-          RUN_ATTEMPT_NUMBER: ${{github.run_attempt}}
-          MAXIMUM_ATTEMPTS: ${{vars.MAXIMUM_ATTEMPTS}}
+  # test1:
+  #     runs-on: windows-latest
+  #     steps:
+  #     - name: Run a node command
+  #       run: #Exit if therun number is greater than maximum number of attempts
+  #         if [ $RUN_ATTEMPT_NUMBER -gt $MAXIMUM_ATTEMPTS ]; then
+  #           echo "EXisting beacuse the run number tahn the maximum number of attempts"
+  #           exit 1
+  #         fi
+  #       env:
+  #         RUN_ATTEMPT_NUMBER: ${{github.run_attempt}}
+  #         MAXIMUM_ATTEMPTS: ${{vars.MAXIMUM_ATTEMPTS}}
           
-      - name: Run job
-        run:
-          echo "Running job"
-          sleep 1
+      # - name: Run job
+      #   run:
+      #     echo "Running job"
+      #     sleep 1
       
 
 
-  build:
-    if: ${{true}}
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run a one line Script
-        run: echo Hello,world!
+    build:
+      if: ${{true}}
+      runs-on: windows-latest
+      steps:
+        - uses: actions/checkout@v4
+        - name: Run a one line Script
+          run: echo Hello,world!
         
-      - name: Run a one multi-line 
-        run: |
+        - name: Run a one multi-line 
+          run: |
               echo "add other actions to 
               build"
               echo "test,and deploy your 
               projectScript"
-  test2:
+    test2:
       runs-on: windows-latest
       steps:
           - uses: actions/checkout@v4
@@ -67,7 +71,7 @@ jobs:
                 GREETING: ${{'HELLO'}} WORLD
                 ADDITION: ${{ 1 == 2 }} 
                 EVENT: ${{ github.event_name }}
-  test3:
+    test3:
       if: ${{ github.triggering_actor=='saikiranreddykandakatla999-sys'}}
       runs-on: windows-latest
       steps:
