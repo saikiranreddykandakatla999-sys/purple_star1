@@ -22,6 +22,7 @@ jobs:
       
 
   build:
+    if: ${{true}}
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -48,10 +49,12 @@ jobs:
                 ADDITION: ${{ 1 == 2 }} 
                 EVENT: ${{ github.event_name }}
   test3:
+      if: ${{ github.triggering_actor=='saikiranreddykandakatla999-sys'}}
       runs-on: windows-latest
       steps:
           - uses: actions/checkout@v4
           - name: experimenting
+            if: ${{true}}
             run: |
                 echo $CONTAINS
                 echo $FORMAT
