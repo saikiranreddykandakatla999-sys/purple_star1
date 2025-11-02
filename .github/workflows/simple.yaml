@@ -11,14 +11,16 @@ on:
 
 jobs:
   build:
-    runs-on: window-latest
+    runs-on: windows-latest
     steps:
-      -uses: actions/checkout@v4
-      -name: Run a one line Script
+      - uses: actions/checkout@v4
+      - name: Run a one line Script
         run: echo Hello,world!
         
-      -name: Run a one multi-line 
+      - name: Run a one multi-line 
         run: |
-              echo add other actions to build
-          echo test,and deploy your projectScript
+              echo add other actions to 
+              build
+              echo test,and deploy your 
+              projectScript
       
