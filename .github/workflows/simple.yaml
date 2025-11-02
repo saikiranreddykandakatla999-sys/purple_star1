@@ -23,9 +23,14 @@ jobs:
               build"
               echo "test,and deploy your 
               projectScript"
-      - name: Super-linter
-        uses: super-linter/super-linter@v8.2.1 # x-release-please-version
-        env:
-          # To report GitHub Actions status checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies 
+        run: npm install
+      - name: Build project
+        run: npm run build
+      - name: Run tests
+        run: npm test
       
