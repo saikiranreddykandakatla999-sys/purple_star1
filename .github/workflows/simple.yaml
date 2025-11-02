@@ -25,7 +25,7 @@ jobs:
       steps:
       - name: Run a node command
         run: #Exit if therun number is greater than maximum number of attempts
-          if [$RUN_ATTEMPT_NUMBER -gt $MAXIMUM_ATTEMPTS]; then
+          if [ $RUN_ATTEMPT_NUMBER -gt $MAXIMUM_ATTEMPTS ]; then
             echo "EXisting beacuse the run number tahn the maximum number of attempts"
             exit 1
           fi
