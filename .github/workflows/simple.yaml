@@ -4,7 +4,13 @@ run-name: Run of the simple workflow
 
 on:
   push:
-    branches: ["main"]
+    branches:
+    - main
+    - 'releases/**'
+    - '!test/**'
+    paths:
+    - README.md
+    - docs/**
   pull_request:
     branches: ["main"]
   workflow_dispatch:
