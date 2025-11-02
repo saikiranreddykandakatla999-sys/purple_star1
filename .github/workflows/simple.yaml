@@ -19,7 +19,22 @@ jobs:
           node-version: 18
       - name: Run a node command
         run: node -e "console.log('running from node!')"
+        
+  test1:
+      runs-on: windows-latest
+      steps:
+      - name: Run a node command
+        run: #Exit if therun number is greater than maximum number of attempts
+          if [$RUN_ATTEMPT_NUMBER -gt $MAXIMUM_ATTEMPT]; then
+            echo "EXisting beacuse the run number tahn the maximum number of attempts"
+            exit 1
+          fi
+      - name: Run job
+        run:
+          echo "Running job"
+          sleep 1
       
+
 
   build:
     if: ${{true}}
