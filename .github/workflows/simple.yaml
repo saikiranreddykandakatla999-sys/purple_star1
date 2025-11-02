@@ -1,0 +1,24 @@
+name: Simple WorkFlow
+
+run-name: Run of the simple workflow
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: window-latest
+    steps:
+      -uses: actions/checkout@v4
+      -name: Run a one line Script
+        run: echo Hello,world!
+        
+      -name: Run a one multi-line 
+        run: |
+              echo add other actions to build
+          echo test,and deploy your projectScript
+      
