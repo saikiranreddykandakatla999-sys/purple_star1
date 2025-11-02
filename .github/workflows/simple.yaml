@@ -4,13 +4,7 @@ run-name: Run of the simple workflow
 
 on:
   push:
-    branches:
-    - main
-    - 'releases/**'
-    - '!test/**'
-    paths:
-    - README.md
-    - docs/**
+    branches: ["main"]
   pull_request:
     branches: ["main"]
   workflow_dispatch:
@@ -40,5 +34,16 @@ jobs:
               build"
               echo "test,and deploy your 
               projectScript"
-              
-  
+  test2:
+      runs-on: windows-latest
+      steps:
+          - uses: actions/checkout@v4
+          - name: experimenting
+            run: |
+                echo $GREETING
+                echo $ADDITION
+                echo $EVENT
+            env:
+                GREETING: ${{'HELLO'}} WORLD
+                ADDITION: ${{ 1 == 2 }} 
+                EVENT: ${{ github.event_name }}
