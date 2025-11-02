@@ -47,3 +47,16 @@ jobs:
                 GREETING: ${{'HELLO'}} WORLD
                 ADDITION: ${{ 1 == 2 }} 
                 EVENT: ${{ github.event_name }}
+  test3:
+      runs-on: windows-latest
+      steps:
+          - uses: actions/checkout@v4
+          - name: experimenting
+            run: |
+                echo $CONTAINS
+                echo $FORMAT
+                echo $TO_JSON
+            env:
+                CONTAINS: ${{contains('github actions','actions')}}
+                FORMAT: ${{format('this {0} {1}','is','cool')}} 
+                TO_JSON: ${{ toJSON(github.event) }}
